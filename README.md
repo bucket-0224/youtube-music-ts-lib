@@ -1,6 +1,8 @@
 # youtube-music-ts-lib
 
 - This YOUTUBE API is designed for YouTube Music (distinct from YouTube's music videos), providing proper type definitions for seamless integration into your development tools.
+- This library is a modified version of some clippings from the existing library, youtube-music-apis(https://github.com/iamamritpalrandhawa/youtube-music-apis).
+
 
 ## Features Overview
 
