@@ -4,7 +4,7 @@
 - This library is a modified version of some clippings from the existing library, [youtube-music-apis](https://github.com/iamamritpalrandhawa/youtube-music-apis).
 
 
-## Features Overview
+## Features Overview ( Same with youtube-music-apis, nothing changed expect listMusicFromAlbum )
 
 This API provides a variety of functions to explore and interact with YouTube Music content.
 
