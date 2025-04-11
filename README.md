@@ -20,4 +20,4 @@
 
 ## Issue tab is always open :D
 
-- I'm not professional of develop typescript library, so if you find some issues, upload issues please, i'll fix asap :)
+- I'm not professional of develop typescript library, so if you find some issues, upload issues please, i'll fix it asap :)
