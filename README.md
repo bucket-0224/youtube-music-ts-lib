@@ -15,5 +15,6 @@
 
 ``` javascript
    const listOfMusicsFromAlbum = await listMusicFromAlbum('/*albumId what you want to parse*/', '/*api key from scraper api*/');
+   const listOfMusicsFromPlaylist = await listMusicFromPlaylist('/*playlist id what you want to parse*/', '/*api key from scraper api*/');
 
 ```
