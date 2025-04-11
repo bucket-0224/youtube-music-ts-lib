@@ -13,7 +13,7 @@
 
 - Before using this feature, You need to take your own scraper api key, you can get api key from [here](https://www.scraperapi.com/), you can get free key, it can be 1000 queries per month.
 
-```
+``` javascript
    const listOfMusicsFromAlbum = await listMusicFromAlbum('/*albumId what you want to parse*/', '/*api key from scraper api*/');
 
 ```
