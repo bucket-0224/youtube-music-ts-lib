@@ -9,40 +9,38 @@ import { parseMusicInPlaylistItem } from './parsers.js';
  * @returns An array of parsed music items.
  */
 export const parsePlaylistBody = (body: {
-  contents: {
-    singleColumnBrowseResultsRenderer: {
-      tabs: {
-        tabRenderer: {
-          content: {
-            sectionListRenderer: {
-              contents: {
-                musicPlaylistShelfRenderer?: { contents: any[] };
-                musicCarouselShelfRenderer: { contents: any[] };
-              }[];
-            };
-          };
+    contents: {
+        singleColumnBrowseResultsRenderer: {
+            tabs: {
+                tabRenderer: {
+                    content: {
+                        sectionListRenderer: {
+                            contents: {
+                                musicPlaylistShelfRenderer?: { contents: any[] };
+                                musicCarouselShelfRenderer: { contents: any[] };
+                            }[];
+                        };
+                    };
+                };
+            }[];
         };
-      }[];
     };
-  };
 }): MusicItem[] => {
-  const content =
-    body.contents.singleColumnBrowseResultsRenderer.tabs[0].tabRenderer.content
-      .sectionListRenderer.contents[0];
-  const { contents } =
-    content.musicPlaylistShelfRenderer ?? content.musicCarouselShelfRenderer;
-  const results: MusicItem[] = [];
-  contents.forEach((content: any) => {
-    try {
-      const song = parseMusicInPlaylistItem(content);
-      if (song) {
-        results.push(song);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  });
-  return results;
+    const content =
+        body.contents.singleColumnBrowseResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents[0];
+    const { contents } = content.musicPlaylistShelfRenderer ?? content.musicCarouselShelfRenderer;
+    const results: MusicItem[] = [];
+    contents.forEach((content: any) => {
+        try {
+            const song = parseMusicInPlaylistItem(content);
+            if (song) {
+                results.push(song);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    });
+    return results;
 };
 
 /**
@@ -50,37 +48,41 @@ export const parsePlaylistBody = (body: {
  * @param playlistId The ID of the playlist to fetch music items from.
  * @returns A promise resolving to an array of music items.
  */
-export async function listMusicFromPlaylist(
-  playlistId: string
-): Promise<MusicItem[]> {
-  let browseId;
-  if (!playlistId.startsWith('VL')) {
-    browseId = 'VL' + playlistId;
-  }
+export async function listMusicFromPlaylist(playlistId: string, scraperApiKey: string): Promise<MusicItem[]> {
+    let browseId;
+    if (!playlistId.startsWith('VL')) {
+        browseId = 'VL' + playlistId;
+    }
 
-  try {
-    const response = await axios.post(
-      'https://music.youtube.com/youtubei/v1/browse',
-      {
-        ...context.body,
-        browseId,
-      },
-      {
-        params: {
-          alt: 'json',
-          key: 'AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30',
-        },
-        headers: {
-          'User-Agent':
-            'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
-          origin: 'https://music.youtube.com',
-        },
-      }
-    );
+    const YOUTUBE_ENDPOINT =
+        'https://music.youtube.com/youtubei/v1/browse?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&alt=json'; // 실제 key 사용
 
-    return parsePlaylistBody(response.data);
-  } catch (error) {
-    console.error(`Error in listMusicsFromPlaylist: ${error}`);
-    return [];
-  }
+    // ScraperAPI URL
+    const SCRAPER_API_URL = `http://api.scraperapi.com?api_key=${scraperApiKey}&url=${encodeURIComponent(
+        YOUTUBE_ENDPOINT
+    )}`;
+
+    try {
+        const response = await axios.post(
+            SCRAPER_API_URL,
+            {
+                ...context.body,
+                browseId,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'User-Agent': 'com.google.android.youtube/17.36.4 (Linux; U; Android 9)',
+                    'Accept-Language': 'en-US,en;q=0.9',
+                    'X-Youtube-Client-Name': '21', // Android Music client
+                    'X-Youtube-Client-Version': '5.36.50',
+                },
+            }
+        );
+
+        return parsePlaylistBody(response.data);
+    } catch (error) {
+        console.error(`Error in listMusicsFromPlaylist: ${error}`);
+        return [];
+    }
 }
