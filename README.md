@@ -6,7 +6,7 @@
 
 ## What Features Changed?
 
-- Fixed for the phenomenon where listMusicFromAlbum no longer returns videoId.
+- Fixed for the phenomenon where listMusicFromAlbum, listOfMusicsFromPlaylist no longer returns videoId.
 - Also adjusted the position of videoId and adjusted and modified the code and some return codes of parser.ts accordingly.
 
 ## How to use it?
@@ -15,5 +15,9 @@
 
 ``` javascript
    const listOfMusicsFromAlbum = await listMusicFromAlbum('/*albumId what you want to parse*/', '/*api key from scraper api*/');
-
+   const listOfMusicsFromPlaylist = await listMusicFromPlaylist('/*playlist id what you want to parse*/', '/*api key from scraper api*/');
 ```
+
+## Issue tab is always open :D
+
+- I'm not professional of develop typescript library, so if you find some issues, upload issues please, i'll fix it asap :)
