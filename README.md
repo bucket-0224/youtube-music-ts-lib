@@ -16,5 +16,8 @@
 ``` javascript
    const listOfMusicsFromAlbum = await listMusicFromAlbum('/*albumId what you want to parse*/', '/*api key from scraper api*/');
    const listOfMusicsFromPlaylist = await listMusicFromPlaylist('/*playlist id what you want to parse*/', '/*api key from scraper api*/');
-
 ```
+
+## Issue tab is always open :D
+
+- I'm not professional of develop typescript library, so if you find some issues, upload issues please, i'll fix asap :)
