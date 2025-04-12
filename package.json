@@ -1,7 +1,7 @@
 {
     "name": "youtube-music-ts-lib",
-    "description": "Unofficial YouTube Music API for Node.js ( fixed some bugs, scraps issues )s",
-    "version": "1.0.5",
+    "description": "Unofficial YouTube Music API for Node.js ( fixed some bugs, scraps issues )",
+    "version": "1.0.0",
     "exports": "./dist/index.js",
     "files": [
         "dist"
@@ -10,7 +10,7 @@
     "node": " >=14.13.1 || >=16.0.0",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/iamamritpalrandhawa/youtube-music-apis.git"
+        "url": "git+https://github.com/bucket-0224/youtube-music-ts-lib.git"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
