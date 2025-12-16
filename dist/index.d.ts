@@ -173,7 +173,7 @@ declare function listMusicFromAlbum(albumId: string, scraperApiKey: string): Pro
  * @param playlistId The ID of the playlist to fetch music items from.
  * @returns A promise resolving to an array of music items.
  */
-declare function listMusicFromPlaylist(playlistId: string): Promise<MusicItem[]>;
+declare function listMusicFromPlaylist(playlistId: string, scraperApiKey: string): Promise<MusicItem[]>;
 
 /**
  * Fetches and parses artist data by artist ID.
