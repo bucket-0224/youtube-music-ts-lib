@@ -8,29 +8,27 @@ import axios from 'axios';
  * @param body - The response body from the API.
  * @returns An array of MusicVideo objects.
  */
-export const extractMusicsFromSearchResponse = (body: {
-  contents: any;
-}): MusicItem[] => {
-  try {
-    const { contents } =
-      body.contents.tabbedSearchResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents.pop()
-        .musicShelfRenderer;
-    const results: MusicItem[] = [];
-    contents.forEach((content: any) => {
-      try {
-        const song = parseMusicItem(content);
-        if (song) {
-          results.push(song);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    });
-    return results;
-  } catch (err) {
-    console.log('Failed to searchMusics', err);
-    return [];
-  }
+export const extractMusicsFromSearchResponse = (body: { contents: any }): MusicItem[] => {
+    try {
+        const { contents } =
+            body.contents.tabbedSearchResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents.pop()
+                .musicShelfRenderer;
+        const results: MusicItem[] = [];
+        contents.forEach((content: any) => {
+            try {
+                const song = parseMusicItem(content);
+                if (song) {
+                    results.push(song);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        });
+        return results;
+    } catch (err) {
+        console.log('Failed to searchMusics', err);
+        return [];
+    }
 };
 
 /**
@@ -39,27 +37,27 @@ export const extractMusicsFromSearchResponse = (body: {
  * @returns A promise resolving to an array of MusicVideo objects.
  */
 export async function searchForMusic(query: string): Promise<MusicItem[]> {
-  const url = 'https://music.youtube.com/youtubei/v1/search?alt=json';
-  const body = {
-    ...context.body,
-    params: 'EgWKAQIIAWoKEAoQCRADEAQQBQ%3D%3D',
-    query,
-    originalQuery: query,
-    searchMethod: 'ENTER_KEY',
-    validationStatus: 'VALID',
-  };
+    const url = 'https://music.youtube.com/youtubei/v1/search?alt=json';
+    const body = {
+        ...context.body,
+        params: 'EgWKAQIIAWoKEAoQCRADEAQQBQ%3D%3D',
+        query,
+        originalQuery: query,
+        searchMethod: 'ENTER_KEY',
+        validationStatus: 'VALID',
+    };
 
-  try {
-    const response = await axios.post(url, body, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
-        Origin: 'https://music.youtube.com',
-      },
-    });
-    return extractMusicsFromSearchResponse(response.data as any);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return [];
-  }
+    try {
+        const response = await axios.post(url, body, {
+            headers: {
+                'User-Agent':
+                    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                Origin: 'https://music.youtube.com',
+            },
+        });
+        return extractMusicsFromSearchResponse(response.data as any);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return [];
+    }
 }
