@@ -21,3 +21,5 @@
 ## Issue tab is always open :D
 
 - I'm not professional of develop typescript library, so if you find some issues, upload issues please, i'll fix it asap :)
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://coff.ee/ydh878787)
